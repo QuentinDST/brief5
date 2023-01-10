@@ -28,18 +28,18 @@
 </form>
 
  <input type="submit" id='submit' value='LOGIN' >
+  </br>
 
  <?php
 
-    include 'database.php';
+  include 'database.php';
+   global $db;
 
- if(isset($_GET['erreur'])){
- $err = $_GET['erreur'];
- if($err==1 || $err==2)
- echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
- }
+   $q = $db->query("SELECT * FROM `users`");
+    while ($user = $q->fetch()){
+      echo "first_name : " .$user['first_name'] . "</br>";
+    }
+
  ?>
- </form>
- </div>
  </body>
 </html>

@@ -1,14 +1,13 @@
 <?php
 
-define('HOST','localhost');
+/* define('HOST','localhost');
 define('dbname','bookmark_gestionnaire');
 define('user','root');
-define('pass','');
+define('pass',''); */
 
 try{
     $db = new PDO('mysql:host=localhost;dbname=bookmark_gestionnaire;charset=utf8', 'root', '');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo 'connexion établie';
 } catch(PDOException $e){
     echo $e;
 }

@@ -1,12 +1,7 @@
 <?php
 
-try {
-    // Connexion à la base de données
-    $connexion_bookmark = new PDO('mysql:host=localhost;dbname=bookmark_gestionnaire;charset=utf8', 'root', '');
-    echo("connexion établie ");
-    // définir le mode exception d'erreur PDO 
-    $connexion_bookmark->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
+include 'database.php';
+global $db;    
 
     // REQUETE INSERTION USERS //
     $insert_requete = "INSERT INTO `users` (`second_name`, `first_name`, `email`,`password`) 
@@ -22,16 +17,12 @@ try {
     ('Tony', 'TRIEWVELLER', 'toto341@gmail.com', 'kejaui'),
     ('Jolene', 'Mikus', 'jojo.mik@gmail.com', 'ejhyyyyeh')";
 
-    $stmt = $connexion_bookmark->prepare($insert_requete);
+    $stmt = $db->prepare($insert_requete);
 
     // Execution de la requête
 
     $stmt->execute();
-    echo "</br>Nouveaux enregistrement ajoutés avec succès";
-      } catch(PDOException $e) {
-        echo $insert_requete . "
-        " . $e->getMessage();    
-  }
-  $connexion_bookmark = null;
+    echo "</br>Nouveaux enregistrement ajoutés avec succès"; 
+    $db = null;
 
 ?>
