@@ -1,0 +1,36 @@
+-- CRUD Pour les categorie
+
+-- Insérer une categorie
+
+INSERT INTO categorie (`first_name`, `second_name`, `email`,`password`) 
+VALUES ('Quentin', 'DESTRADE', 'quentin.destrade@gmail.com', 'aloha');
+
+-- Récupérer toutes les categories, tri alphabetique sur le nom de la categorie
+
+SELECT 
+`id`, 
+`name` 
+FROM `categories` 
+ORDER BY `name` 
+ASC;
+
+-- Récupérer une seule categorie, par son id
+
+SELECT 
+`id`, 
+`name`
+FROM `categories` 
+WHERE `id` = '@id_categorie';
+
+-- Modifier une categorie
+
+UPDATE `categories` 
+SET 
+`name` =  '$name_categories'
+`color` = '$color_categories'
+WHERE `id` = '@id_categorie';
+
+-- Supprimer un utilisateur
+
+DELETE FROM `categories` 
+WHERE `id` = '@id_categorie';
