@@ -2,13 +2,12 @@
 
 -- Insérer une categorie
 
-INSERT INTO categorie (`first_name`, `second_name`, `email`,`password`) 
-VALUES ('Quentin', 'DESTRADE', 'quentin.destrade@gmail.com', 'aloha');
+INSERT INTO categorie (`name`) 
+VALUES ('HTML');
 
 -- Récupérer toutes les categories, tri alphabetique sur le nom de la categorie
 
-SELECT 
-`id`, 
+SELECT
 `name` 
 FROM `categories` 
 ORDER BY `name` 
@@ -27,7 +26,6 @@ WHERE `id` = '@id_categorie';
 UPDATE `categories` 
 SET 
 `name` =  '$name_categories'
-`color` = '$color_categories'
 WHERE `id` = '@id_categorie';
 
 -- Supprimer un utilisateur
