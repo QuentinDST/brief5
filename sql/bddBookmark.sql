@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 10 jan. 2023 à 16:36
+-- Généré le : jeu. 12 jan. 2023 à 19:01
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.1.12
 
@@ -32,18 +32,26 @@ CREATE TABLE `bookmarks` (
   `URL` varchar(100) NOT NULL,
   `Title` varchar(100) NOT NULL,
   `Description` varchar(1000) NOT NULL,
-  `categorie_id` int(11) NOT NULL
+  `création` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `bookmarks`
 --
 
-INSERT INTO `bookmarks` (`id`, `URL`, `Title`, `Description`, `categorie_id`) VALUES
-(19, 'https://www.youtube.com/', 'youtube', 'site de musique', 0),
-(20, 'https://getbootstrap.com/', 'bootsrap', 'framework', 0),
-(21, 'https://www.airbnb.fr/', 'airbnb', 'location de maison', 0),
-(22, 'https://www.figma.com/', 'figma', 'creation de wireframe', 0);
+INSERT INTO `bookmarks` (`id`, `URL`, `Title`, `Description`, `création`) VALUES
+(1, 'https://www.youtube.com/', 'youtube', 'site de musique', '2023-01-11'),
+(2, 'https://getbootstrap.com/', 'bootsrap', 'framework', '2023-01-11'),
+(3, 'https://www.airbnb.fr/', 'airbnb', 'location de maison', '2023-01-11'),
+(4, 'https://www.figma.com/', 'figma', 'creation de wireframe', '2023-01-11'),
+(5, 'http://alore.com', 'alore', 'ddddddd', '2023-01-11'),
+(6, 'http://ksole.com', 'ksol', 'deeeeeeeeee', '2023-01-11'),
+(7, 'https://guizmo.com', 'guizmo', 'site sur guizmo', '2023-01-11'),
+(8, 'https://guizmo.com', 'guizmo', 'site sur guizmo', '2023-01-11'),
+(9, 'https://guizmo.com', 'guizmo', 'site sur guizmo', '2023-01-11'),
+(10, 'https://guizmo.com', 'guizmo', 'site sur guizmo', '2023-01-11'),
+(11, 'http://eeee.com', 'jdududu', 'dhhhhhhhhhh', '2023-01-12'),
+(12, 'http://ksole.com', 'jjjuuu', 'gggggggggg', '2023-01-12');
 
 -- --------------------------------------------------------
 
@@ -56,6 +64,13 @@ CREATE TABLE `bookmarks_categories` (
   `categorie_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `bookmarks_categories`
+--
+
+INSERT INTO `bookmarks_categories` (`bookmark_id`, `categorie_id`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -64,19 +79,18 @@ CREATE TABLE `bookmarks_categories` (
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `bookmark_id` int(11) NOT NULL
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `bookmark_id`) VALUES
-(1, 'HTML', 0),
-(2, 'CSS', 0),
-(3, 'LOCATION', 0),
-(4, 'MUSIQUE', 0);
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'HTML'),
+(2, 'CSS'),
+(3, 'LOCATION'),
+(4, 'MUSIQUE');
 
 --
 -- Index pour les tables déchargées
@@ -92,8 +106,7 @@ ALTER TABLE `bookmarks`
 -- Index pour la table `bookmarks_categories`
 --
 ALTER TABLE `bookmarks_categories`
-  ADD KEY `FK1` (`categorie_id`),
-  ADD KEY `FK2` (`bookmark_id`);
+  ADD PRIMARY KEY (`bookmark_id`,`categorie_id`);
 
 --
 -- Index pour la table `categories`
@@ -109,7 +122,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `bookmarks`
 --
 ALTER TABLE `bookmarks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `categories`
