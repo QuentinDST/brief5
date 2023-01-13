@@ -23,7 +23,7 @@
       // Connexion à la base de donnée et lien à mon fichier fonctions
 
       include 'connexionDb/database.php';
-      include_once 'php/functionBookmark.php';
+      
 
       ?>
 
@@ -45,18 +45,23 @@
           
         <div class="form-check formulaire"> 
           <label for="categorie">Catégorie :</label>
+          <br>
           <?php
-            $addSql = "SELECT `id`, `name`, `categorie_id` FROM categories"; /* groupe concat */
+            $addSql = "SELECT `id`, `name` FROM categories";
             $result = $db->query($addSql);
-            $num_rows = $result->rowCount();
-            while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-              echo "<input type='checkbox' value='" . $row['id'] . "'>" . $row['name'] . "</input>";
-            };
-          ?> 
+            while ($row = $result->fetch()) {
+                      
+              echo '<input type="checkbox" name="categorie" value="'.$row['id'].'">'. $row['name'].'</br></input>';
+            ?> 
+          <?php };
+          ?>
+          
         </div>
-
-        <input class="btn btn-success" type="submit" value="+ Ajouter" name="submit">
-        <a href="index.php" class="btn btn-success"><i class="bi bi-plus"></i> Retour</a>
+        
+        <div class="create--button">
+          <input class="btn btn-success" type="submit" value="+ Ajouter" name="submit">
+          <a href="index.php" class="btn btn-success"><i class="bi bi-plus"></i> Retour</a>
+        </div>
       </form>
     </div>
   </div>
@@ -64,14 +69,15 @@
 
   // Appel de la fonction addBookmark pour ajouter un bookmark
 
-  if (isset($_POST['submit'])) {
+ if (isset($_POST['submit'])) {  
     $url = $_POST['url'];
     $title = $_POST['title'];
     $description = $_POST['description'];
-    $categorie_id = $_POST['categorie'];
-    $message = add_bookmark($url, $title, $description, $categorie_id, $db);
-    echo $message;
-  };
+    $categories = $_POST['categorie'];
+
+    include_once 'php/functionBookmark.php';
+    $message = add_bookmark($url, $title, $description, $categories,$db);
+  }; 
 
   ?>
 </body>

@@ -9,7 +9,14 @@ td{
     background-color: #fff;
 }
 
-
+h2{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 30px;
+}
 
 
 /* CREATION.PHP */
@@ -19,7 +26,7 @@ td{
 }
 
 .create-title{
-    margin-top: 100px;
+    margin-top: 80px;
     margin-bottom: 50px;
     background-color: #fff;
     padding: 10px;
@@ -38,12 +45,4 @@ label{
     font-size: 20px;
     margin-bottom: 5px;
     margin-left: 5px;
-}
-
-.button-bookmark{
-    margin: auto;
-    font-size: 15px;
-    width: 150px;
-    padding: 5px;
-    border-radius: 5px;
 }

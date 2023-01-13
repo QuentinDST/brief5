@@ -1,9 +1,6 @@
 <?php
 
-/* define('HOST','localhost');
-define('dbname','bookmark');
-define('user','root');
-define('pass',''); */
+// Connexion à la base de donnée via PDO
 
 try{
     $db = new PDO('mysql:host=localhost;dbname=bookmark;charset=utf8', 'root', '');
@@ -12,8 +9,4 @@ try{
     echo $e;
 }
 
-/* $q = $db->query("SELECT * FROM `bookmarks`");
-    while ($link = $q->fetch()){
-      var_dump($link);
-    } */
 

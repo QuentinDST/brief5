@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="mt-5 mb-3 d-flex justify-content-between">
+                    <div class="mt-5 mb-3 d-flex justify-content-between index--title">
                         <h2 class="">Ajoute tes Bookmarks préféré et range les par catégorie!</h2>
                         <a href="create.php" class="btn btn-success"><i class="bi bi-plus"></i> Ajouter</a>
                     </div>
@@ -27,8 +27,16 @@
             //Connexion à la base de donnée.
             include 'connexionDb/database.php';
 
-            //Récupérer les données de ma table Bookmarks
-            $sql = "SELECT `id`, `URL`, `Title`, `Description` FROM bookmarks;";
+            //Récupérer les données de ma table Bookmarks via la table de jointure
+            $sql = "SELECT 
+            bookmarks.`id`, 
+            bookmarks.`URL`, 
+            bookmarks.`Title`, 
+            bookmarks.`Description`, 
+            categories.name 
+            FROM bookmarks 
+            JOIN bookmarks_categories ON bookmarks.`id` = bookmarks_categories.bookmark_id 
+            JOIN categories ON bookmarks_categories.categorie_id = categories.id;";
 
             $stmt = $db->prepare($sql);
             
@@ -49,6 +57,7 @@
             echo '<tbody>';
 
             // Boucle qui parcours les résultats et crée les lignes du tableau
+        
             $result = $stmt->fetchAll();
             if (count($result) > 0) {
                 foreach($result as $row) {
@@ -57,7 +66,7 @@
                         echo '<td class="data_url">' . $row['URL'] . '</td>';
                         echo '<td class="data_title">' . $row['Title'] . '</td>';
                         echo '<td class="data">' . $row['Description'] . '</td>';
-                        echo '<td class="data">' . $row['categorie_id'] . '</td>';
+                        echo '<td class="data">' . $row['name'] . '</td>';
                         echo '<td class="data">';
                             echo '<a href="#" ><span class="bi bi-pencil"></span></a>';
                             echo '<a href="#" ><span class="bi bi-trash"></span></a>';
