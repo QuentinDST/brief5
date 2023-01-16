@@ -6,7 +6,10 @@ include 'connexionDb/database.php';
 if (isset($_GET["id"])){
     $id = $_GET["id"];
 
-    $sql = "DELETE FROM bookmarks JOIN bookmarks_categories ON bookmarks_categories.`bookmark_id` = bookmarks_categories.`categorie_id` WHERE id = $id";
+    $sql = ("DELETE bookmarks, bookmarks_categories
+    FROM bookmarks
+    JOIN bookmarks_categories ON bookmarks_categories.bookmark_id = bookmarks.id
+    WHERE bookmarks.id = $id;");
     $deleteSql= $db->prepare($sql);
     $deleteSql -> execute();
 }
@@ -14,7 +17,4 @@ if (isset($_GET["id"])){
 header("location: /BRIEF5/index.php");
 exit;
 
-echo "<pre>";
-        var_dump($updateSql);
-        echo "</pre>";
 ?>
