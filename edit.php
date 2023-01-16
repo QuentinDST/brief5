@@ -11,7 +11,8 @@ $title = "";
 $description = "";
 
 $errorMessage = "";
-$successMessage = " ";
+$successMessage = "";
+$updateSql = "";
 
 // Vérification si l'id est bien récupérées par la méthode GET
 
@@ -60,14 +61,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
       
       include_once 'php/editBookmark.php';
       $message = edit_bookmark($id, $url, $title, $description, $db);
-      
-      
-      if(!$message){
-          $errorMessage = "erreur lors de la mise à jour";
-      }
-      
-      $successMessage = "Bookmark modifié avec succès";
-    
+
       header("location: /BRIEF5/index.php");
   }
 
@@ -129,10 +123,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
           
         <?php
 
-        if(!empty($succesMessage)){
+        if(!empty($successMessage)){
           echo "
           <div class='alert alert-success alert-dismissible fade show' role='alert'>
-            <strong>$succesMessage</strong>
+            <strong>$successMessage</strong>
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
           </div>
           ";

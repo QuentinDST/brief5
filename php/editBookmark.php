@@ -8,15 +8,15 @@ global $db;
 function edit_bookmark($id, $url, $title, $description, $db){
     
     try{
-        //Démarrer une transaction pour garantir que toutes les opérations sont effectuées ensemble.
-        $db->beginTransaction();
 
         //Modifier les données depuis la table bookmark et les appliquer
 
-        $updateSql = $db->prepare('UPDATE bookmarks SET URL = "'.$url.'", Title = "'.$title.'", Description ="'.$description.'" WHERE id = '.$id);
-        $updateSql ->execute(); 
-        
-        $db->commit();
+        $updateSql = $db->prepare('UPDATE bookmarks SET URL = :url, Title = :title, Description = :description WHERE id = :id');
+            $updateSql->bindValue(':url', $url, PDO::PARAM_STR);
+            $updateSql->bindValue(':title', $title, PDO::PARAM_STR);
+            $updateSql->bindValue(':description', $description, PDO::PARAM_STR);
+            $updateSql->bindValue(':id', $id, PDO::PARAM_INT);
+        $updateSql->execute();
                 
         } catch (PDOException $e) {
             $db->rollback();

@@ -23,7 +23,7 @@
                         <a class="nav-link active" aria-current="page" href="#">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="create.php">AJOUTER UN BOOKMARK</a>
+                        <a class="nav-link active" href="create.php">AJOUTER UN BOOKMARK</a>
                     </li>
                 </ul>
                 <span class="navbar-text">
@@ -34,15 +34,22 @@
     </nav>
 
     <div class="container">
-        <div class="row">
+        <div class="row bookmark--title">
             <div class="col-md-12">
-                <div class="mt-5 mb-3 d-flex justify-content-between index--title">
-                    <nav class="navbar navbar-light justify-content-center fs-3 bb-5 style=" class="background-color: #67BE4B">Ajoute tes bookmarks Favoris et range les par catégorie</nav>
-                    <a href="create.php" class="btn btn-success btn--addbookmark"><i class="bi bi-plus"></i> Ajouter</a>
+                <div class="mt-5 mb-3 d-flex justify-content-center index--title">
+                    <h1>Ajoute tes bookmark favoris et range les par catégories</h1>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="row bookmark--button">
+            <div class="col-md-12">
+                <div class="col-6 gy-5 mx-auto d-flex justify-content-between index--title">
+                    <a href="create.php" class="btn btn-success btn-sm index--button"><i class="bi bi-plus"></i> Add New Bookmark</a>
+                    <a href="createCategorie.php" class="btn btn-success btn-sm"><i class="bi bi-plus"></i> Add New Category</a>
+                </div>
+            </div>
+        </div>
+
     <div class="container">
         <?php
         //Connexion à la base de donnée.
@@ -96,18 +103,9 @@
         } else {
             echo '<tr><td colspan="5">Aucune donnée trouvée</td></tr>';
         }
+
         ?>
     </div>
-        
-    <!-- <div class="container add--categorie">
-        <div class="row text-center create-title">
-            <h2>Crée une nouvelle categorie</h2>
-        </div>
-        <div class="row">
-            <a href="#" class="btn btn-success"><i class="bi bi-plus"></i> Crée une catégorie</a>
-        </div>
-    </div> -->
 </div>
-
 </body>
 </html>

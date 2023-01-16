@@ -7,12 +7,11 @@ body{
 
 .index--title{
     margin-top: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
-.btn--addbookmark{
-    background-color: #67BE4B;
-    border: none;
+.bookmark--button{
+    margin-bottom: 15px;
 }
 
 th, td{

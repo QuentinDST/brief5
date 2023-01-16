@@ -7,8 +7,6 @@ global $db;
 
 function add_bookmark($url, $title, $description, $categories, $db) {
     try{
-        //Démarrer une transaction pour garantir que toutes les opérations sont effectuées ensemble.
-        $db->beginTransaction();
 
         // Insertion via requête SQL de l'url, titre et description du nouveau bookmark dans la table bookmarks
         $addBookmarkSql=$db->prepare("INSERT INTO bookmarks (`URL`,`Title`, `Description`) 
@@ -23,8 +21,6 @@ function add_bookmark($url, $title, $description, $categories, $db) {
             $addCategories=$db->prepare("INSERT INTO bookmarks_categories (`bookmark_id`, `categorie_id`) VALUES ($bookmark_id, $categories)");
             $addCategories->execute();
         }
-
-        $db->commit();
         
         return "Bookmark ajouté avec succès!";
             } catch (PDOException $e) {
