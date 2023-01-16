@@ -11,74 +11,103 @@
 </head>
 <body>
 <div class="wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="mt-5 mb-3 d-flex justify-content-between index--title">
-                        <h2 class="">Ajoute tes Bookmarks préféré et range les par catégorie!</h2>
-                        <a href="create.php" class="btn btn-success"><i class="bi bi-plus"></i> Ajouter</a>
-                    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">WELCOME</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Togglenavigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create.php">AJOUTER UN BOOKMARK</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Login
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mt-5 mb-3 d-flex justify-content-between index--title">
+                    <nav class="navbar navbar-light justify-content-center fs-3 bb-5 style=" class="background-color: #67BE4B">Ajoute tes bookmarks Favoris et range les par catégorie</nav>
+                    <a href="create.php" class="btn btn-success btn--addbookmark"><i class="bi bi-plus"></i> Ajouter</a>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <?php
+    </div>
+    <div class="container">
+        <?php
+        //Connexion à la base de donnée.
+        include 'connexionDb/database.php';
+        //Récupérer les données de ma table Bookmarks via la table de jointure
+        $sql = "SELECT 
+        bookmarks.`id`, 
+        bookmarks.`URL`, 
+        bookmarks.`Title`, 
+        bookmarks.`Description`, 
+        categories.name 
 
-            //Connexion à la base de donnée.
-            include 'connexionDb/database.php';
-
-            //Récupérer les données de ma table Bookmarks via la table de jointure
-            $sql = "SELECT 
-            bookmarks.`id`, 
-            bookmarks.`URL`, 
-            bookmarks.`Title`, 
-            bookmarks.`Description`, 
-            categories.name 
-            FROM bookmarks 
-            JOIN bookmarks_categories ON bookmarks.`id` = bookmarks_categories.bookmark_id 
-            JOIN categories ON bookmarks_categories.categorie_id = categories.id;";
-
-            $stmt = $db->prepare($sql);
-            
-            $stmt->execute();
-            
-            // Creation du tableau d'affichage des données
-            echo '<table class="table table-bordered">';
-                echo '<thead>';
-                    echo '<tr>';
-                        echo '<th>ID</th>';
-                        echo '<th>URL</th>';
-                        echo '<th>Title</th>';
-                        echo '<th>Description</th>';
-                        echo '<th>Categorie</th>';
-                        echo '<th>Action</th>';
-                    echo '</tr>';
-                echo '</thead>';
-            echo '<tbody>';
-
-            // Boucle qui parcours les résultats et crée les lignes du tableau
+        FROM bookmarks 
+        JOIN bookmarks_categories ON bookmarks.`id` = bookmarks_categories.bookmark_id 
+        JOIN categories ON bookmarks_categories.categorie_id = categories.id;";
+        $stmt = $db->prepare($sql);
         
-            $result = $stmt->fetchAll();
-            if (count($result) > 0) {
-                foreach($result as $row) {
-                    echo '<tr>';
-                        echo '<td class="data_id">' . $row['id'] . '</td>';
-                        echo '<td class="data_url">' . $row['URL'] . '</td>';
-                        echo '<td class="data_title">' . $row['Title'] . '</td>';
-                        echo '<td class="data">' . $row['Description'] . '</td>';
-                        echo '<td class="data">' . $row['name'] . '</td>';
-                        echo '<td class="data">';
-                            echo '<a href="#" ><span class="bi bi-pencil"></span></a>';
-                            echo '<a href="#" ><span class="bi bi-trash"></span></a>';
-                        echo '</td>';
-                    echo '</tr>';
-                }
-            } else {
-                echo '<tr><td colspan="5">Aucune donnée trouvée</td></tr>';
+        $stmt->execute();
+        
+        // Creation du tableau d'affichage des données
+        echo '<table class="table table-bordered table-striped">';
+            echo '<thead>';
+                echo '<tr>';
+                    echo '<th>ID</th>';
+                    echo '<th>URL</th>';
+                    echo '<th>Title</th>';
+                    echo '<th>Description</th>';
+                    echo '<th>Categorie</th>';
+                    echo '<th>Edition</th>';
+                echo '</tr>';
+            echo '</thead>';
+        echo '<tbody>';
+        // Boucle qui parcours les résultats et crée les lignes du tableau
+    
+        $result = $stmt->fetchAll();
+        if (count($result) > 0) {
+            foreach($result as $row) {
+                echo '<tr>';
+                    echo '<td class="data_id">' . $row['id'] . '</td>';
+                    echo '<td class="data_url">' . $row['URL'] . '</td>';
+                    echo '<td class="data_title">' . $row['Title'] . '</td>';
+                    echo '<td class="data">' . $row['Description'] . '</td>';
+                    echo '<td class="data">' . $row['name'] . '</td>';
+                    echo '<td class="data">';
+                    //Penser à récupérer l'id pour effectuer les requêtes Edit et Delete
+                    echo '<a class="btn--edit" href="edit.php?id= '. $row['id'] .'"><span class="bi bi-pencil"></span></a>';
+                        echo '<a class="btn--delete" href="delete.php?id='. $row['id'] .'" ><span class="bi bi-trash"></span></a>';
+                    echo '</td>';
+                echo '</tr>';
             }
-            ?>
-
+        } else {
+            echo '<tr><td colspan="5">Aucune donnée trouvée</td></tr>';
+        }
+        ?>
+    </div>
+        
+    <!-- <div class="container add--categorie">
+        <div class="row text-center create-title">
+            <h2>Crée une nouvelle categorie</h2>
         </div>
+        <div class="row">
+            <a href="#" class="btn btn-success"><i class="bi bi-plus"></i> Crée une catégorie</a>
+        </div>
+    </div> -->
+</div>
 
 </body>
 </html>

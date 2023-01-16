@@ -5,19 +5,43 @@ body{
 
 /* INDEX.PHP */
 
-td{
-    background-color: #fff;
+.index--title{
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.btn--addbookmark{
+    background-color: #67BE4B;
+    border: none;
+}
+
+th, td{
+    border: none;
+}
+
+.btn--edit{
+    color: rgb(228, 150, 23);
+    font-size: 20px;
+    
+}
+
+.btn--delete{
+    color: red;
+    font-size: 20px;
+    margin-left: 10px;
 }
 
 h2{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 6px;
-    font-size: 30px;
+    font-size: 40px;
 }
 
+.btn.btn-success{
+    padding:15px;
+}
+
+.add--categorie{
+    margin-bottom: 100px;
+}
 
 /* CREATION.PHP */
 
@@ -26,16 +50,22 @@ h2{
 }
 
 .create-title{
-    margin-top: 80px;
+    margin-top: 0px;
     margin-bottom: 50px;
     background-color: #fff;
     padding: 10px;
     border-radius: 6px;
 }
 
-.groupe-formulaire{
-    margin-top: 50px;
-}
+.group--form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: none;
+        border-radius: 3px;
+        padding: 25px;
+        font-size: 12px;
+        width: 60vw;    }
 
 .formulaire{
     margin-bottom: 15px;
@@ -46,3 +76,4 @@ label{
     margin-bottom: 5px;
     margin-left: 5px;
 }
+

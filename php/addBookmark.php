@@ -32,27 +32,3 @@ function add_bookmark($url, $title, $description, $categories, $db) {
             return "Erreur lors de l'ajout du Bookmark: " . $e->getMessage();
         }
 }   
-
-//Fonction pour modifier un bookmark
-/* 
-function update_bookmark($id, $title, $url, $description, $db) {
-    $updateSql = "UPDATE bookmarks SET title='$title', url='$url', description='$description'WHERE id=$id";
-    if ($db->query($updateSql) === TRUE) {
-        $message = "Bookmark modifié avec succès";
-    } else {
-        $message = "Erreur: " . $updateSql . "<br>" . $db->error;
-    }
-    return $message;
-}
- */
-//Fonction pour modifier un bookmark
-
-function delete_bookmark($id, $db) {
-    $deleteSql = "DELETE FROM bookmarks WHERE id=$id";
-    if ($db->query($deleteSql) === TRUE) {
-        $message = "Bookmark supprimé avec succès";
-    } else {
-        $message = "Error: " . $deleteSql . "<br>" . $db->error;
-    }
-    return $message;
-}
