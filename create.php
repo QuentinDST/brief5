@@ -28,11 +28,9 @@
     
     //Si l'URL et le titre ne sont pas remplis, alors message d'erreur
 
-    do{
-      if (empty($url) || empty($title)){
+    if (empty($url) || empty($title)){
        $errorMessage = " L'URL et le titre sont obligatoires";
-       break;
-      }
+    }
       
       // Appel de la fonction addbookmark pour ajouter un nouveau bookmark avec sa catégorie
 
@@ -46,8 +44,7 @@
       header("location: /BRIEF5/index.php");
       exit;
 
-      } while(false);
-    }
+      }
     
 ?>
 
