@@ -9,6 +9,7 @@
     $title = "";
     $description = "";
     $categories = "";
+    $selectedCategorie = "";
     $message = ""; 
     $errorMessage = "";
     $successMessage ='';
@@ -21,6 +22,10 @@
      $description = $_POST['description'];
      @$categories = $_POST['categorie'];
     
+    foreach($_POST['categorie'] as $selectedCategorie){
+      echo $selectedCategorie."</br>";
+    }
+    
     //Si l'URL et le titre ne sont pas remplis, alors message d'erreur
 
     do{
@@ -32,7 +37,7 @@
       // Appel de la fonction addbookmark pour ajouter un nouveau bookmark avec sa catégorie
 
       include_once 'php/addBookmark.php';
-      $message = add_bookmark($url, $title, $description, $categories,$db);
+      $message = add_bookmark($url, $title, $description, $selectedCategorie,$db);
       
       //Si la requête a fonctionné, l'utilisateur et redirigé sur l'index.
 
@@ -72,9 +77,13 @@
       
       if(!empty($errorMessage)){
         echo "
-        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-          <strong>$errorMessage</strong>
-          <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        <div class='row justify-content-center'>
+          <div class='col-sm-12 col-md-8 col-lg-8'>
+            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+             <strong>$errorMessage</strong>
+             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+            </div>
+          </div>
         </div>
         ";
       }
@@ -107,7 +116,7 @@
                 $result = $db->query($addSql);
                 while ($row = $result->fetch()) {
                  
-                  echo '<input type="checkbox" name="categorie" value="'.$row['id'].'">'. $row['name'].'</br></input>';
+                  echo '<input type="checkbox" name="categorie[]" value="'.$row['id'].'">'. $row['name'].'</br></input>';
                 }
                 ?> 
               <?php 
