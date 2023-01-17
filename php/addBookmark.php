@@ -5,7 +5,7 @@ global $db;
 
 // Création de la fonction pour ajouter un bookmark 
 
-function add_bookmark($url, $title, $description, $categories, $db) {
+function add_bookmark($url, $title, $description, $selectedCategorie, $db) {
     try{
 
         // Insertion via requête SQL de l'url, titre et description du nouveau bookmark dans la table bookmarks
@@ -15,10 +15,11 @@ function add_bookmark($url, $title, $description, $categories, $db) {
         //on stocke la valeur de l'id bookmark via lastInsertId
         $bookmark_id=$db->lastInsertId();
 
-        // Insertion via requête SQL des valeurs id de bookmark et catégorie dans la table de relation. 
+        // Insertion via requête SQL des valeurs id de bookmark et catégorie dans la table de relation en fonction des choix multiples ou non de l'utilisateur 
 
-        if(isset($categories)){
-            $addCategories=$db->prepare("INSERT INTO bookmarks_categories (`bookmark_id`, `categorie_id`) VALUES ($bookmark_id, $categories)");
+        if(isset($selectedCategorie)){}
+        foreach($_POST['categorie'] as $selectedCategorie){
+            $addCategories=$db->prepare("INSERT INTO bookmarks_categories (`bookmark_id`, `categorie_id`) VALUES ($bookmark_id, $selectedCategorie)");
             $addCategories->execute();
         }
         

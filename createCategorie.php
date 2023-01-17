@@ -24,7 +24,6 @@
        break;
       }
     
-      $name = strtoupper($name);
       // Appel de la fonction addcategorie pour ajouter une nouvelle catégorie
 
       include_once 'php//addCategorie.php';
@@ -32,11 +31,7 @@
 
       // Si la requête a fonctionné on redirige l'utilisateur vers la page principale
 
-      if(!$message){
-        return " Catégorie crée";
-      }
-
-     header("location: /BRIEF5/index.php");
+      header("location: /BRIEF5/index.php");
       exit;
     } while (false);
 }
@@ -74,6 +69,16 @@
       </div>
       ";
     }
+
+    if($successMessage){
+        echo "
+        <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+          <strong>$successMessage</strong>
+          <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>
+        ";
+      }
+
     ?>
 
       <div class="row justify-content-center">

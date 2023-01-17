@@ -9,6 +9,7 @@
     $title = "";
     $description = "";
     $categories = "";
+    $selectedCategorie = "";
     $message = ""; 
     $errorMessage = "";
     $successMessage ='';
@@ -19,20 +20,25 @@
      $url = $_POST['url'];
      $title = $_POST['title'];
      $description = $_POST['description'];
-     @$categories = $_POST['categorie'];
+     $categories = $_POST['categorie'];
+    
+    // Boucle pour récupérer les choix multiples des checkbox null ou multiple 
+     
+     foreach($_POST['categorie'] as $selectedCategorie){
+      echo $selectedCategorie."</br>";
+    }
+    
     
     //Si l'URL et le titre ne sont pas remplis, alors message d'erreur
 
-    do{
       if (empty($url) || empty($title)){
        $errorMessage = " L'URL et le titre sont obligatoires";
-       break;
       }
       
       // Appel de la fonction addbookmark pour ajouter un nouveau bookmark avec sa catégorie
 
       include_once 'php/addBookmark.php';
-      $message = add_bookmark($url, $title, $description, $categories,$db);
+      $message = add_bookmark($url, $title, $description, $selectedCategorie,$db);
       
       //Si la requête a fonctionné, l'utilisateur et redirigé sur l'index.
 
@@ -40,8 +46,6 @@
 
       header("location: /BRIEF5/index.php");
       exit;
-
-      } while(false);
     }
     
 ?>
@@ -107,7 +111,7 @@
                 $result = $db->query($addSql);
                 while ($row = $result->fetch()) {
                  
-                  echo '<input type="checkbox" name="categorie" value="'.$row['id'].'">'. $row['name'].'</br></input>';
+                  echo '<input type="checkbox" name="categorie[]" value="'.$row['id'].'">'. $row['name'].'</br></input>';
                 }
                 ?> 
               <?php 
@@ -128,7 +132,7 @@
                 <input class="btn btn-success" type="submit" value="+ Ajouter" name="submit">
               </div>
               <div class="col-sm-3 col-md-3 d-grid">
-                <a href="index.php" class="btn btn-success" role="button"><i class="bi bi-plus"></i> Retour</a>
+                <a href="index.php" class="btn btn-success btn--close" role="button"><i class="bi bi-plus"></i> Retour</a>
               </div>
             </div>
           </form>
