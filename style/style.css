@@ -68,9 +68,10 @@ h2{
 
 .formulaire{
     margin-bottom: 15px;
+    padding-left: 0;
 }
 
-.checkbox{
+.form-check.formulaire{
     padding: 0;
 }
 
@@ -80,3 +81,21 @@ label{
     margin-left: 5px;
 }
 
+/* CREATEDELETECATEGORIE.PHP/ */
+
+.formulaire--button{
+    margin-bottom: 50px;
+}
+
+.checkbox--categories input[type="checkbox"] {
+    display: inline-flex;
+    margin-top: 10px;
+  }
+
+.delete--categorie {
+    margin-right: 10px;
+  }
+  
+.back--categorie {
+    margin-left: 10px;
+  }
