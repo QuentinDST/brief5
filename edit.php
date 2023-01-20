@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     //Requête pour récupérer la ligne du bookmark selectionné
 
     $getBookmark = "SELECT `URL`, `Title`, `Description` FROM bookmarks WHERE `id` = $id";
-    $result = $db->prepare($sql);
+    $result = $db->prepare($getBookmark);
     $result->execute();
     $rowBookmark = $result->fetch();
     
@@ -146,10 +146,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             <a href="index.php" class="btn btn-success" role="button"><i class="bi bi-plus"></i> Retour</a>
           </div>
         </div>
-        
-
-
-
       </form>
     </div>
   </div>

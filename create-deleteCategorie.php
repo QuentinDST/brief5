@@ -41,6 +41,7 @@
       $deleteCategories = "";
 
       if(isset($_POST['categorie'])){
+        var_dump($_POST);
 
       $selectedCategories = $_POST['categorie'];
       // On utilise la fonction implode pour retourner les elements du tableau en une chaine de caractère.
