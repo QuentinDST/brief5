@@ -8,7 +8,7 @@ if (isset($_GET["id"])){
 
     $sql = ("DELETE bookmarks, bookmarks_categories
     FROM bookmarks
-    JOIN bookmarks_categories ON bookmarks_categories.bookmark_id = bookmarks.id
+    LEFT OUTER JOIN bookmarks_categories ON bookmarks_categories.bookmark_id = bookmarks.id
     WHERE bookmarks.id = $id;");
     $deleteSql= $db->prepare($sql);
     $deleteSql -> execute();
