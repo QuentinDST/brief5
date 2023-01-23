@@ -105,8 +105,8 @@
                     echo '</td>';
                     echo '<td class="data">';
                     //Penser à récupérer l'id pour effectuer les requêtes Edit et Delete
-                    echo '<a class="btn--edit" href="edit.php?id= '. $row['id'] .'"><span class="bi bi-pencil"></span></a>';
-                    echo '<a class="btn--delete" href="delete.php?id='. $row['id'] .'" ><span class="bi bi-trash"></span></a>';
+                        echo '<a class="btn--edit" href="edit.php?id= '. $row['id'] .'"><span class="bi bi-pencil"></span></a>';
+                        echo '<a class="btn--delete" href="delete.php?id='. $row['id'] .'" ><span class="bi bi-trash"></span></a>';
                     ?> 
 
                     <!-- <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="deletebookmark" aria-hidden="true">
